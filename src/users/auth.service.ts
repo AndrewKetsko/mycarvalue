@@ -28,7 +28,7 @@ export class AuthService {
   async signin(email: string, password: string) {
     const [user] = await this.userService.find(email);
     if (!user) {
-      new NotFoundException('user not found');
+      throw new NotFoundException('user not found');
     }
     const [salt, storedHash] = user.password.split('.');
     const hash = (await scrypt(password, salt, 32)) as Buffer;
