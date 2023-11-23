@@ -1,11 +1,27 @@
-###Create User
+###SignUp User
 POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "some@mail.com",
+    "email": "test@mail.com",
     "password": "somepassword"
 }
+
+###SignIn User
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+    "email": "test@mail.com",
+    "password": "somepassword"
+}
+
+###Get current user
+GET http://localhost:3000/auth/whoami
+
+###Sign Out user
+POST http://localhost:3000/auth/signout
+
 
 ###Find user by id
 GET http://localhost:3000/auth/8
@@ -14,10 +30,17 @@ GET http://localhost:3000/auth/8
 GET http://localhost:3000/auth?email=some@mail.com
 
 ###Delete user by id
-DELETE http://localhost:3000/auth/5
+DELETE http://localhost:3000/auth/8
 
 ###Update user
 PATCH http://localhost:3000/auth/2
 Content-Type: application/json
 
 {"email":"someotheremail@mail.com"}
+
+###Set color
+GET http://localhost:3000/auth/colors/blue
+
+###Get color
+GET http://localhost:3000/auth/colors
+
