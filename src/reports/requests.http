@@ -10,3 +10,14 @@ Content-Type: application/json
 "lng":0,
 "lat":0,
 "price":20000}
+
+### approve report
+
+PATCH http://localhost:3000/reports/5
+Content-Type: application/json
+
+{"approved":true}
+
+### get estimate
+
+GET http://localhost:3000/reports?make=toyota&model=FJ&lng=0&lat=0&year=2008&mileage=100000
