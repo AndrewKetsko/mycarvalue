@@ -19,6 +19,7 @@ const cookieSession = require('cookie-session');
     }),
     UsersModule,
     ReportsModule,
+
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
@@ -30,6 +31,7 @@ const cookieSession = require('cookie-session');
         };
       },
     }),
+
     // TypeOrmModule.forRoot({
     //   type: 'sqlite',
     //   database: 'db.sqlite',
@@ -44,11 +46,12 @@ const cookieSession = require('cookie-session');
   ],
 })
 export class AppModule {
+  constructor(private configService: ConfigService) {}
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(
         cookieSession({
-          keys: ['secretCookieCrypter'],
+          keys: [this.configService.get('COOKIE_KEY')],
         }),
       )
       .forRoutes('*');
