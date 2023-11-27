@@ -4,11 +4,9 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ReportsModule } from './reports/reports.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-// import { User } from './users/user.entity';
-// import { Report } from './reports/report.entity';
 import { APP_PIPE } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import * as dbConfig from '../ormconfig.js';
+import { TypeOrmConfigService } from './config/typeorm.config';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cookieSession = require('cookie-session');
@@ -31,8 +29,9 @@ const cookieSession = require('cookie-session');
 
     //running app but tests falls
 
-    TypeOrmModule.forRoot(dbConfig),
-
+    TypeOrmModule.forRootAsync({
+      useClass: TypeOrmConfigService,
+    }),
     //fully running app & tests
 
     // TypeOrmModule.forRootAsync({
